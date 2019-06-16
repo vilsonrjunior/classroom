@@ -1,10 +1,5 @@
 class TeachersController < ApplicationController
 
-TEACHERS = {
-1 => {first_name: "Tatiane", last_name: "Depieri", languages: "English", email: "tatiane@englishbee.com", password: "123456"},
-2 => {first_name: "Vilson", last_name: "Jr", languages: "English", email: "vilson@englishbee.com", password: "123456"}
-}
-
   # def create
   # end
 
@@ -16,16 +11,16 @@ TEACHERS = {
 
   def index
     if params[:first_name].blank?
-        @teachers = TEACHERS
+        @teachers = Teacher.all
     else
-    @teachers = TEACHERS.select do |id, teacher|
-      teacher[:first_name] == params[:first_name]
+    @teachers = Teacher.select do |teacher|
+      teacher.first_name == params[:first_name]
     end
     end
   end
 
   def show
-    @teacher = TEACHERS[params[:id].to_i]
+    @teacher = Teacher.find(params[:id])
   end
 
 end

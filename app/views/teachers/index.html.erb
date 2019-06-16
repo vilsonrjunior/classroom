@@ -9,9 +9,9 @@
 
 <div>
 <ul>
-  <% @teachers.each do |id, teacher| %>
+  <% @teachers.each do |teacher| %>
    <li>
-    <%= link_to teacher[:first_name], teacher_path(id) %>, teaches <%= teacher[:languages] %>. Contact email is <%= teacher[:email] %>
+    <%= teacher.first_name %>, teaches <%= teacher.language %>. Contact email is <%= teacher.email %>
    </li>
   <% end %>
 </ul>
