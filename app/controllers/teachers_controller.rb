@@ -13,11 +13,12 @@ TEACHERS = {
   end
 
   def index
-    @teachers = TEACHERS
+    @teachers = TEACHERS.select do |id, teacher|
+      teacher[:first_name] == params[:first_name]
+    end
   end
 
   def show
-    @teachers = TEACHERS
   end
 
 end

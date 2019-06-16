@@ -1,8 +1,19 @@
-<h1>Our Teachers</h1>
+<h2>Our Teachers</h2>
 
-<% @teachers.each do |id, teacher| %>
+<div>
+  <form action="/teachers" method="get">
+    <input type="text" name="first_name" placeholder="Please type name or languages">
+    <input type="submit">
+  </form>
+</div>
+
+
+<div>
 <ul>
-  <%= teacher[:first_name] %>
+  <% @teachers.each do |id, teacher| %>
+   <li>
+     <%= teacher[:first_name] %>, teaches <%= teacher[:languages] %>
+   </li>
+  <% end %>
 </ul>
-<% end %>
-
+</div>
