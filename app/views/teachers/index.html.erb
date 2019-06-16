@@ -7,12 +7,11 @@
   </form>
 </div>
 
-
 <div>
 <ul>
   <% @teachers.each do |id, teacher| %>
    <li>
-     <%= teacher[:first_name] %>, teaches <%= teacher[:languages] %>
+     <%= teacher[:first_name] %> <%= teacher[:last_name] %>, teaches <%= teacher[:languages] %>. Contact email is <%= teacher[:email] %>
    </li>
   <% end %>
 </ul>
