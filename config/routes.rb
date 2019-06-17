@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   get 'contact', to: 'pages#contact'
   get 'careers', to: 'pages#careers'
 
-  resources :teachers, only: [:index, :show, :new]
+  resources :teachers, only: [:index, :show, :new, :create]
 
 end
