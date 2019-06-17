@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   resources :students
   resources :teachers
+  resources :courses, only: [:index, :new, :create, :show]
   devise_for :users
   root to: 'pages#home'
 
