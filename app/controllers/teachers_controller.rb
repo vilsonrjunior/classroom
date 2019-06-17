@@ -28,6 +28,25 @@ class TeachersController < ApplicationController
     @teacher = Teacher.find(params[:id])
   end
 
+  def edit
+    @teacher = Teacher.find(params[:id])
+  end
+
+  def update
+    @teacher = Teacher.find(params[:id])
+    @teacher.update(teacher_params)
+    redirect_to teacher_path
+  end
+
+
+  def destroy
+    @teacher = Teacher.find(params[:id])
+    @teacher.destroy
+    redirect_to teachers_path
+  end
+
+  private
+
   def teacher_params
     params.require(:teacher).permit(:first_name, :last_name, :language, :email)
   end
