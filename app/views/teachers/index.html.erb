@@ -11,7 +11,13 @@
 <ul>
   <% @teachers.each do |teacher| %>
    <li>
-    <%= teacher.first_name %>, teaches <%= teacher.language %>. Contact email is <%= teacher.email %>
+
+    <p><%= link_to teacher.first_name, teacher_path(teacher) %></p>
+
+    Teaches <%= teacher.language %>
+
+    Contact email is <%= teacher.email %>
+
    </li>
   <% end %>
 </ul>
