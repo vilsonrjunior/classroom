@@ -8,23 +8,21 @@
 
 
 USERS = [
-  "tomek",
-  "vilson",
-  "caio",
-  "sonia",
-  "guido",
-  "eli",
-  "prima",
-  "peter",
-  "ashwin",
-  "janna",
-  "george",
-  "charles",
-  "lorenzo",
-  "john",
-  "kane",
-  "yejin",
-  "romain"
+  "Caio",
+  "Sonia",
+  "Guido",
+  "Eli",
+  "Prima",
+  "Peter",
+  "Ashwin",
+  "Janna",
+  "George",
+  "Charles",
+  "Lorenzo",
+  "John",
+  "Kane",
+  "Yejin",
+  "Romain"
 ]
 
 LEVEL = [
@@ -57,9 +55,12 @@ Student.delete_all
 
 p 'deleted seeds'
 
-p '-----'
+
+p '____________________'
+
 
 p 'creating 5 teachers'
+
 
 x = 0
 5.times do
@@ -68,15 +69,17 @@ x = 0
         last_name: Faker::Name.last_name,
         # picture: "https://randomuser.me/api/portraits/#{['wo',''].sample}men/#{(0..99).to_a.sample}.jpg",
         # username: Faker::Internet.username,
+        admin: false,
         language: "English",
         email: "#{USERS[x]}@test.com",
-        # password: "123456"
+        password: "123456"
       )
   # teacher.remote_photo_url = teacher.picture
   teacher.save!
   x += 1
 end
 
+p '__________'
 
 p 'creating 50 students'
 
@@ -96,6 +99,26 @@ x = 0
   student.save!
   x += 1
 end
+
+p '_____________'
+
+p '-----'
+
+p 'creating 1 admin teacher'
+
+admin = Teacher.new(
+        first_name: "Vilson",
+        last_name: Faker::Name.last_name,
+        # picture: "https://randomuser.me/api/portraits/#{['wo',''].sample}men/#{(0..99).to_a.sample}.jpg",
+        # username: Faker::Internet.username,
+        admin: true,
+        language: "English",
+        email: "vilson@test.com",
+        password: "123456"
+  )
+  admin.save!
+
+p 'DONE!'
 
 # p 'created 10 users'
 

@@ -22,8 +22,10 @@
         <td><%= student.age %></td>
         <td><%= student.level %></td>
         <td><%= link_to 'Show', student %></td>
+        <% if current_teacher.admin? %>
         <td><%= link_to 'Edit', edit_student_path(student) %></td>
         <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -31,4 +33,6 @@
 
 <br>
 
+<% if current_teacher.admin? %>
 <%= link_to 'New Student', new_student_path %>
+<% end %>
