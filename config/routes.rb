@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   resources :students
-  resources :courses, only: [:index, :new, :create, :show]
+  resources :courses, only: [:index, :new, :create, :show, :edit]
   devise_for :teachers
   resources :teachers
   root to: 'pages#home'

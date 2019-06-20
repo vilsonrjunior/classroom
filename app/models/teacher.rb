@@ -10,7 +10,10 @@ class Teacher < ApplicationRecord
   validates :email, presence: true, uniqueness: true
 
 
-  has_many :courses, foreign_key: :teacher_id
+  has_many :courses
   has_many :students, through: :courses
 end
 
+
+
+#{:foreign_key => "TeacherID"}

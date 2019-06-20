@@ -91,7 +91,8 @@ x = 0
         # picture: "https://randomuser.me/api/portraits/#{['wo',''].sample}men/#{(0..99).to_a.sample}.jpg",
         # username: Faker::Internet.username,
         age: rand(5..12),
-        level: LEVEL.sample
+        level: LEVEL.sample,
+        course_id: Course.all.sample
         # email: "#{USERS[x]}@test.com",
         # password: "123456"
       )
@@ -117,6 +118,28 @@ admin = Teacher.new(
         password: "123456"
   )
   admin.save!
+
+  p '____________________'
+
+  p 'creating courses'
+
+
+  x = 0
+12.times do
+  course = Course.new(
+        name: Faker::Book.title,
+        # picture: "https://randomuser.me/api/portraits/#{['wo',''].sample}men/#{(0..99).to_a.sample}.jpg",
+        # username: Faker::Internet.username,
+        description: Faker::Movies::BackToTheFuture.quote,
+        level: LEVEL.sample,
+        teacher: Teacher.all.sample
+        # email: "#{USERS[x]}@test.com",
+        # password: "123456"
+      )
+  # teacher.remote_photo_url = teacher.picture
+  course.save!
+  x += 1
+end
 
 p 'DONE!'
 
