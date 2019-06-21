@@ -2,6 +2,8 @@
 
 <h1>Students</h1>
 
+<% if current_teacher.admin? %>
+
 <table>
   <thead>
     <tr>
@@ -27,12 +29,12 @@
         <td><% if student.course != nil %></td>
         <td><%= student.course.name %></td>
         <% else %>
-        <p>You've not enrolled in a course yet</p>
+        <td>No course</td>
         <% end %>
         <% if student.course != nil %>
         <td><%= student.course.teacher.first_name%></td>
         <% else %>
-        <p>You don't have a teacher yet</p>
+        <td>No teacher</td>
   <% end %>
 </p>
         <td><%= link_to 'Show', student %></td>
@@ -50,5 +52,7 @@
 <% if current_teacher.admin? %>
 <%= link_to 'New Student', new_student_path %>
 <% end %>
-
+<% else %>
+  <p>Private page</p>
+<% end %>
 
