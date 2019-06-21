@@ -20,6 +20,22 @@
   <%= @student.level %>
 </p>
 
+<p>
+  <strong>Course:</strong>
+  <% if @student.course_id == nil %>
+  <p>You haven't enroller in any courses yet</p>
+  <% else %>
+  <%= @student.course.name %>
+  <% end %>
+</p>
+
+<p>
+  <% if @student.course_id != nil %>
+  <strong>Teacher:</strong>
+  <%= @student.course.teacher.first_name %>
+  <% end %>
+</p>
+
 <% if current_teacher.admin? %>
 <%= link_to 'Edit', edit_student_path(@student) %>
 |<% end %>

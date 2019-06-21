@@ -52,6 +52,7 @@ p 'deleting previous seeds'
 
 Teacher.delete_all
 Student.delete_all
+Course.delete_all
 
 p 'deleted seeds'
 
@@ -92,7 +93,7 @@ x = 0
         # username: Faker::Internet.username,
         age: rand(5..12),
         level: LEVEL.sample,
-        course_id: Course.all.sample
+        course_id: Course.all.sample(1)
         # email: "#{USERS[x]}@test.com",
         # password: "123456"
       )
@@ -121,7 +122,8 @@ admin = Teacher.new(
 
   p '____________________'
 
-  p 'creating courses'
+
+    p 'creating courses'
 
 
   x = 0
@@ -142,264 +144,6 @@ admin = Teacher.new(
   x += 1
 end
 
-
+p '_________________________'
 
 p 'DONE!'
-
-# p 'created 10 users'
-
-#   tomek = User.new(
-#         first_name: 'Tomek',
-#         last_name: 'Atlast',
-#         picture: "https://randomuser.me/api/portraits/#{['wo',''].sample}men/#{(0..99).to_a.sample}.jpg",
-#         username: 'Tomek',
-#         email: 'tomek@test.com',
-#         password: "123456"
-#       )
-#   tomek.remote_photo_url = tomek.picture
-#   tomek.save!
-#   tomek.save!
-#   vilson = User.new(
-#         first_name: 'Vilson',
-#         last_name: 'Atlast',
-#         picture: "https://randomuser.me/api/portraits/#{['wo',''].sample}men/#{(0..99).to_a.sample}.jpg",
-#         username: 'Vilson',
-#         email: 'vilson@test.com',
-#         password: "123456"
-#       )
-#   vilson.remote_photo_url = vilson.picture
-#   vilson.save!
-#   vilson.save!
-#   caio = User.new(
-#         first_name: 'Caio',
-#         last_name: 'Atlast',
-#         picture: "https://randomuser.me/api/portraits/#{['wo',''].sample}men/#{(0..99).to_a.sample}.jpg",
-#         username: 'Caio',
-#         email: 'caio@test.com',
-#         password: "123456"
-#       )
-#   caio.remote_photo_url = caio.picture
-#   caio.save!
-  # caio.save!
-
-  # NEED TO MAKE SURE THAT WE DO NOT SAVE TWICE
-
-  # UserRelationship.new(follower: tomek, followed: vilson).save!
-  # UserRelationship.new(follower: tomek, followed: caio).save!
-  # UserRelationship.new(follower: tomek, followed: User.first).save!
-  # UserRelationship.new(follower: tomek, followed: User.second).save!
-  # UserRelationship.new(follower: caio, followed: vilson).save!
-  # UserRelationship.new(follower: caio, followed: tomek).save!
-  # UserRelationship.new(follower: caio, followed: User.first).save!
-  # UserRelationship.new(follower: caio, followed: User.second).save!
-  # UserRelationship.new(follower: vilson, followed: tomek).save!
-  # UserRelationship.new(follower: vilson, followed: caio).save!
-  # UserRelationship.new(follower: vilson, followed: User.first).save!
-  # UserRelationship.new(follower: vilson, followed: User.second).save!
-
-# p '-----'
-# p 'creating 10 places'
-
-# x = 0
-# 10.times do
-#   place = Place.new(
-#     name: PLACE_NAMES[x],
-#     address: PLACE_ADDRESSES[x]
-#     )
-#   place.save!
-#   x += 1
-
-
-# p ' creating posts for the place'
-
-#   (1..10).to_a.sample.times do
-#     post = Post.new(
-#       note: Faker::Restaurant.review,
-#       user: User.all.sample,
-#       place: place
-#       )
-#     post.remote_photo_url = PLACE_PHOTOS.sample
-#     post.save!
-#   end
-# end
-
-# p 'created 10 places'
-# p '-----'
-# p 'creating 30 posts'
-
-
-# p 'created 30 posts'
-# p '-----'
-# p 'creating all tags'
-
-# cafe = Tag.new(
-#   tag_type: 'venue',
-#   name: 'cafe'
-#   )
-# cafe.save!
-
-# bar = Tag.new(
-#   tag_type: 'venue',
-#   name: 'bar'
-#   )
-
-# bar.save!
-
-# restaurant = Tag.new(
-#   tag_type: 'venue',
-#   name: 'restaurant'
-#   )
-# restaurant.save!
-
-# pub = Tag.new(
-#   tag_type: 'venue',
-#   name: 'pub'
-#   )
-# pub.save!
-
-# breakfast = Tag.new(
-#   tag_type: 'meal',
-#   name: 'breakfast'
-#   )
-# breakfast.save!
-
-# brunch = Tag.new(
-#   tag_type: 'meal',
-#   name: 'brunch'
-#   )
-# brunch.save!
-
-# lunch = Tag.new(
-#   tag_type: 'meal',
-#   name: 'lunch'
-#   )
-# lunch.save!
-
-# dinner = Tag.new(
-#   tag_type: 'meal',
-#   name: 'dinner'
-#   )
-# dinner.save!
-
-# dessert = Tag.new(
-#   tag_type: 'meal',
-#   name: 'dessert'
-#   )
-# dessert.save!
-
-# coffee = Tag.new(
-#   tag_type: 'meal',
-#   name: 'coffee'
-#   )
-# coffee.save!
-
-# chilled = Tag.new(
-#   tag_type: 'vibe',
-#   name: 'chilled'
-#   )
-# chilled.save!
-
-# busy = Tag.new(
-#   tag_type: 'vibe',
-#   name: 'busy'
-#   )
-# busy.save!
-
-# elegant = Tag.new(
-#   tag_type: 'vibe',
-#   name: 'elegant'
-#   )
-# elegant.save!
-
-# organic = Tag.new(
-#   tag_type: 'food',
-#   name: 'organic'
-#   )
-# organic.save!
-
-# vegetarian = Tag.new(
-#   tag_type: 'food',
-#   name: 'vegetarian'
-#   )
-# vegetarian.save!
-
-# vegan = Tag.new(
-#   tag_type: 'food',
-#   name: 'vegan'
-#   )
-# vegan.save!
-
-# exotic = Tag.new(
-#   tag_type: 'food',
-#   name: 'exotic'
-#   )
-# exotic.save!
-
-# small_plates = Tag.new(
-#   tag_type: 'food',
-#   name: 'small plates'
-#   )
-# small_plates.save!
-
-# family = Tag.new(
-#   tag_type: 'good_for',
-#   name: 'family'
-#   )
-# family.save!
-
-# dates = Tag.new(
-#   tag_type: 'good_for',
-#   name: 'dates'
-#   )
-# dates.save!
-
-# working = Tag.new(
-#   tag_type: 'good_for',
-#   name: 'working'
-#   )
-# working.save!
-
-# drinks = Tag.new(
-#   tag_type: 'good_for',
-#   name: 'drinks'
-#   )
-# drinks.save!
-
-# p 'tags created'
-# p '-----'
-
-# p 'creating 60 post_tags'
-
-
-# 60.times do
-# post_tag = PostTag.new(
-#   tag: Tag.all.sample,
-#   post: Post.all.sample,
-#   )
-# post_tag.save!
-# end
-
-# p 'created 60 post_tags'
-# p '-----'
-# p 'creating followers / followed relationship'
-
-# 60.times do
-#   followed = User.all.sample
-#   follower = User.where.not(id: followed.id).sample
-#   relationship = UserRelationship.new(follower: follower, followed: followed)
-#   relationship.save! if UserRelationship.where(follower_id: follower.id, followed_id: followed.id).empty?
-# end
-
-# p 'created!'
-# p '-----'
-# p 'creating wishlists'
-
-# 30.times do
-#   wishlist = WishlistItem.new(
-#     place: Place.all.sample,
-#     user: User.all.sample,
-#     )
-#   wishlist.save!
-# end
-
-# p 'created wishlists'
