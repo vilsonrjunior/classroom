@@ -1,7 +1,10 @@
-<h2>This is course <%=@course.name %></h2>
+<h2>This is course <%=@course.name %>, taught be teacher <%=@course.teacher.first_name %></h2>
 
+<h4>Your students are:</h4>
 <li>
   <% @course.students.each do |student|%>
-  <%= student.first_name %>
+<ul>
+    <%= student.first_name %>
+</ul>
   <% end %>
 </li>

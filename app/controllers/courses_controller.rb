@@ -5,16 +5,17 @@ class CoursesController < ApplicationController
       @courses = Course.all
       @course = Course.new
     else
+      # raise
       @teacher = current_teacher
     end
   end
 
   def show
-    if current_teacher.admin?
-      @course = Course.find(params[:id])
-    else
-      @teacher = current_teacher
-    end
+    @course = Course.find(params[:id])
+
+    @students = Student.find(params[:id])
+    # @students = Student.find(params[:student_id])
+
   end
 
   def new

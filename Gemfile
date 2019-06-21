@@ -18,7 +18,7 @@ gem 'webpacker'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
-  # gem 'rails-erd'
+  gem 'rails-erd'
   gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 end
 

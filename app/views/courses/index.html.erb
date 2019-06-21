@@ -2,6 +2,9 @@
 
 <h1>Courses</h1>
 
+<% if current_teacher.courses == [] %>
+  <p>You don't have any courses yet.</p>
+<% else %>
 <table>
   <thead>
     <tr>
@@ -13,8 +16,8 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% @teacher.courses.each do |course| %>
+<% if current_teacher.admin? %>
+  <% @courses.each do |course| %>
       <tr>
         <td><%= course.name %></td>
         <td><%= course.level %></td>
@@ -29,8 +32,24 @@
     <% end %>
   </tbody>
 </table>
+<% else %>
+<%=  %>
+  <tbody>
+    <% current_teacher.courses.each do |course| %>
+      <tr>
+        <td><%= course.name %></td>
+        <td><%= course.level %></td>
+        <td><%= course.description %></td>
+        <td><%= course.teacher.first_name %></td>
+        <td><%= link_to 'Show', course %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <br>
+<% end %>
+<% end %>
 
 <% if current_teacher.admin? %>
 <%= link_to 'New Course', new_course_path %>

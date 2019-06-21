@@ -125,14 +125,15 @@ admin = Teacher.new(
 
 
   x = 0
-12.times do
+5.times do
   course = Course.new(
         name: Faker::Book.title,
         # picture: "https://randomuser.me/api/portraits/#{['wo',''].sample}men/#{(0..99).to_a.sample}.jpg",
         # username: Faker::Internet.username,
         description: Faker::Movies::BackToTheFuture.quote,
         level: LEVEL.sample,
-        teacher: Teacher.all.sample
+        teacher: Teacher.all.sample,
+        students: Student.all.sample(4)
         # email: "#{USERS[x]}@test.com",
         # password: "123456"
       )
@@ -140,6 +141,8 @@ admin = Teacher.new(
   course.save!
   x += 1
 end
+
+
 
 p 'DONE!'
 

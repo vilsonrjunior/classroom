@@ -9,6 +9,7 @@
       <th>Last name</th>
       <th>Age</th>
       <th>Level</th>
+      <th>Course</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -21,6 +22,7 @@
         <td><%= student.last_name %></td>
         <td><%= student.age %></td>
         <td><%= student.level %></td>
+        <td><%= student.course_id %></td>
         <td><%= link_to 'Show', student %></td>
         <% if current_teacher.admin? %>
         <td><%= link_to 'Edit', edit_student_path(student) %></td>
@@ -36,3 +38,5 @@
 <% if current_teacher.admin? %>
 <%= link_to 'New Student', new_student_path %>
 <% end %>
+
+
