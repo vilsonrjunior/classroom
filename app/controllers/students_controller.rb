@@ -10,6 +10,7 @@ class StudentsController < ApplicationController
   # GET /students/1
   # GET /students/1.json
   def show
+    # raise
   end
 
   # GET /students/new
@@ -64,11 +65,11 @@ class StudentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_student
-      @student = Student.find(params[:id])
+      @student = Student.find(params[:id].to_i)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
-      params.require(:student).permit(:first_name, :last_name, :age, :level)
+      params.require(:student).permit(:first_name, :last_name, :age, :level, :course_id)
     end
 end

@@ -1,13 +1,12 @@
-<h2>This is course <%=@course.name %>, taught be teacher <%=@course.teacher.first_name %></h2>
+<h3>This is course <%=@course.name %>, taught be teacher <%=@course.teacher.first_name %></h4>
 
-<h4>Your students are:</h4>
-<li>
+<h5>Your students are:</h5>
+
   <% @course.students.each do |student|%>
 <ul>
-    <%= student.first_name %>
+    <%= student.first_name %> <%= student.last_name %>
 </ul>
   <% end %>
-</li>
 
 
-<h2>LESSONS - GO TO LESSONS</h2>
+<h5>LESSONS - GO TO LESSONS</h5>

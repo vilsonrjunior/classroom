@@ -85,7 +85,7 @@ p '__________'
 p 'creating 50 students'
 
 x = 0
-50.times do
+20.times do
   student = Student.new(
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
@@ -93,7 +93,7 @@ x = 0
         # username: Faker::Internet.username,
         age: rand(5..12),
         level: LEVEL.sample,
-        course_id: Course.all.sample(1)
+        course: Course.all.sample
         # email: "#{USERS[x]}@test.com",
         # password: "123456"
       )

@@ -22,15 +22,15 @@
 
 <p>
   <strong>Course:</strong>
-  <% if @student.course_id == nil %>
-  <p>You haven't enroller in any courses yet</p>
+  <% if @student.course == nil %>
+  <p>You haven't enrollerd in any courses yet</p>
   <% else %>
   <%= @student.course.name %>
   <% end %>
 </p>
 
 <p>
-  <% if @student.course_id != nil %>
+  <% if @student.teacher != nil %>
   <strong>Teacher:</strong>
   <%= @student.course.teacher.first_name %>
   <% end %>

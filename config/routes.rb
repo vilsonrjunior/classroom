@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
 
-  resources :students
-  resources :courses, only: [:index, :new, :create, :show, :edit]
   devise_for :teachers
-  resources :teachers
+  resources :teachers, expect: :show
+
+
+  resources :students
+  resources :courses
+
   root to: 'pages#home'
 
   get 'contact', to: 'pages#contact'

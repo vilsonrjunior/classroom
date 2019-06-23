@@ -12,22 +12,24 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
-
-    @students = Student.find(params[:id])
+    @course.students
+    # raise
     # @students = Student.find(params[:student_id])
-
   end
 
   def new
     if current_teacher.admin?
     @course = Course.new
-    end
   end
 
   def create
-    if current_teacher.admin?
-    @course = Course.new(course_params)
+    @course = Course.create(course_params)
+    if @course.save
+      redirect_to courses_path
+    else
+      render :new
     end
+  end
 
     if @course.save
       redirect_to course_path(@course)
@@ -35,6 +37,17 @@ class CoursesController < ApplicationController
       render :new
     end
   end
+
+  def edit
+     @course = Course.find(params[:id])
+  end
+
+  def update
+    @course = Course.find(params[:id])
+    @course.update(course_params)
+    redirect_to course_path
+  end
+
 
   private
 
@@ -48,69 +61,3 @@ end
 # TEACHER CAN THEN ENTER COURSE
 
 
-
-  # def show
-  #   @listing = Listing.find(params[:id])
-  #   @booking = Booking.new
-  #   @user = current_user
-  #   @wishlist_item = WishlistItem.new
-  #   @wishlist_check = WishlistItem.where(listing_id: @listing.id, user_id: current_user.id) unless current_user.nil?
-  #   # raise
-  # end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# class CoursesController < ApplicationController
-
-#   def index
-#     @courses = Course.all
-#     @course = Course.new
-#   end
-
-#   def show
-#     @course = Course.find(params[:id])
-#     @lesson = Lesson.new
-#   end
-
-#   def new
-#     @course = Course.new
-#   end
-
-#   def create
-#     @course = Course.new(course_params)
-#     @course.teacher = current_teacher
-
-#     if @course.save
-#       redirect_to course_path(@course)
-#     else
-#       render :new
-#     end
-#   end
-
-#    private
-
-#   def course_params
-#     params.require(:course).permit(:school, :name, :description)
-#   end
-# end

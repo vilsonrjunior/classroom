@@ -1,6 +1,7 @@
 
 <p id="notice"><%= notice %></p>
 
+<% if current_teacher.admin? %>
 <h1>Teachers</h1>
 
 <table>
@@ -35,4 +36,7 @@
 <br>
 <% if current_teacher.admin? %>
 <%= link_to 'New Teacher', new_teacher_path %>
+<% end %>
+<% else %>
+<p>Private page</p>
 <% end %>

@@ -3,6 +3,10 @@ class TeachersController < ApplicationController
 
   before_action :set_teacher, only: [:show, :edit, :update, :destroy]
 
+  def new
+    @teacher = Teacher.new
+  end
+
   def create
     @teacher = Teacher.create(teacher_params)
     if @teacher.save
@@ -10,10 +14,6 @@ class TeachersController < ApplicationController
     else
       render :new
     end
-  end
-
-  def new
-    @teacher = Teacher.new
   end
 
   def index
@@ -36,7 +36,6 @@ class TeachersController < ApplicationController
     @teacher.update(teacher_params)
     redirect_to teacher_path
   end
-
 
   def destroy
     @teacher.destroy

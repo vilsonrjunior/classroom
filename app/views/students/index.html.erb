@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Students</h1>
 
 <% if current_teacher.admin? %>
+<h1>Students</h1>
 
 <table>
   <thead>
@@ -53,6 +53,9 @@
 <%= link_to 'New Student', new_student_path %>
 <% end %>
 <% else %>
-  <p>Private page</p>
+<h2>Your students</h2>
+<% current_teacher.students.each do |student|  %>
+<ul><%=student.first_name  %></ul>
+<% end %>
 <% end %>
 
