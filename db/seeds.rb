@@ -22,7 +22,22 @@ USERS = [
   "John",
   "Kane",
   "Yejin",
-  "Romain"
+  "Romain",
+  "Joao",
+  "Maria",
+  "Paulo",
+  "Jose",
+  "Marina",
+  "Mauro",
+  "Paula",
+  "Elo",
+  "Catarina",
+  "Dario",
+  "Andre",
+  "Max",
+  "Leticia",
+  "Monique",
+  "Ester"
 ]
 
 LEVEL = [
@@ -87,15 +102,15 @@ p 'creating 50 students'
 x = 0
 20.times do
   student = Student.new(
-        first_name: Faker::Name.first_name,
+        first_name: "#{USERS[x]}",
         last_name: Faker::Name.last_name,
         # picture: "https://randomuser.me/api/portraits/#{['wo',''].sample}men/#{(0..99).to_a.sample}.jpg",
         # username: Faker::Internet.username,
         age: rand(5..12),
         level: LEVEL.sample,
-        course: Course.all.sample
-        # email: "#{USERS[x]}@test.com",
-        # password: "123456"
+        course: Course.all.sample,
+        email: "#{USERS[x]}@test.com",
+        password: "123456"
       )
   # teacher.remote_photo_url = teacher.picture
   student.save!

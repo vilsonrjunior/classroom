@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_21_075330) do
+ActiveRecord::Schema.define(version: 2019_08_02_131039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,16 @@ ActiveRecord::Schema.define(version: 2019_06_21_075330) do
     t.index ["teacher_id"], name: "index_courses_on_teacher_id"
   end
 
+  create_table "parents", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "photo"
+    t.string "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "students", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -35,7 +45,14 @@ ActiveRecord::Schema.define(version: 2019_06_21_075330) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "course_id"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.index ["course_id"], name: "index_students_on_course_id"
+    t.index ["email"], name: "index_students_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
   end
 
   create_table "teachers", force: :cascade do |t|
