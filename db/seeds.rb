@@ -5,14 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-
 USERS = [
-  "Caio",
-  "Sonia",
-  "Guido",
-  "Eli",
-  "Prima",
   "Peter",
   "Ashwin",
   "Janna",
@@ -40,6 +33,8 @@ USERS = [
   "Ester"
 ]
 
+
+
 LEVEL = [
 "Beginner",
 "Pre Intermediate",
@@ -47,6 +42,14 @@ LEVEL = [
 "Upper Intermediate",
 "Advanced"
 ]
+
+TEACHER = [
+"Caio",
+  "Sonia",
+  "Guido",
+  "Eli",
+  "Prima"
+  ]
 
 # PLACE_PHOTOS = [
   #   "https://cdn.thebalibible.com/uploads/galleries/IMG_1216-lr_1521529204.jpg",
@@ -71,23 +74,86 @@ Course.delete_all
 
 p 'deleted seeds'
 
+p '_________________________________'
 
-p '____________________'
+p 'creating levels'
 
+
+5.times do |x|
+level = Level.new(
+  name: LEVEL[x],
+  description: "Sample sample sample"
+  )
+level.save!
+x += 1
+end
+
+p '_______________________________'
+
+p 'creating parents'
+
+x = 0
+20.times do
+  parent = Parent.new(
+        first_name: Faker::Name.first_name,
+        last_name: Faker::Name.last_name,
+        # phone: Faker::PhoneNumber.cell_phone_with_country_code,
+        email: Faker::Internet.email,
+        password: "123456",
+        address: Faker::Address.city,
+        photo: "https://randomuser.me/api/portraits/#{['wo',''].sample}men/#{(0..99).to_a.sample}.jpg"
+        # username: Faker::Internet.username,
+        # level: LEVEL.sample,
+        # course: Course.all.sample,
+
+      )
+  # teacher.remote_photo_url = teacher.picture
+  parent.save!
+  x += 1
+end
+
+# create_table "parents", force: :cascade do |t|
+#     t.string "email", default: "", null: false
+#     t.string "encrypted_password", default: "", null: false
+#     t.string "reset_password_token"
+#     t.datetime "reset_password_sent_at"
+#     t.datetime "remember_created_at"
+#     t.integer "sign_in_count", default: 0, null: false
+#     t.datetime "current_sign_in_at"
+#     t.datetime "last_sign_in_at"
+#     t.string "current_sign_in_ip"
+#     t.string "last_sign_in_ip"
+#     t.string "name"
+#     t.date "dob"
+#     t.string "phone"
+#     t.text "address"
+#     t.float "lat"
+#     t.float "long"
+#     t.string "last_login_ip", default: "127.0.0.1"
+#     t.datetime "created_at", null: false
+#     t.datetime "updated_at", null: false
+#     t.string "gender"
+#     t.string "image"
+#     t.index ["email"], name: "index_parents_on_email", unique: true
+#     t.index ["reset_password_token"], name: "index_parents_on_reset_password_token", unique: true
+
+p '_________________________________'
 
 p 'creating 5 teachers'
-
 
 x = 0
 5.times do
   teacher = Teacher.new(
-        first_name: USERS[x],
+        first_name: TEACHER[x],
         last_name: Faker::Name.last_name,
-        # picture: "https://randomuser.me/api/portraits/#{['wo',''].sample}men/#{(0..99).to_a.sample}.jpg",
+        language: "English",
+        # dob: Faker::Date.birthday(18, 65),
+        # image: "https://randomuser.me/api/portraits/#{['wo',''].sample}men/#{(0..99).to_a.sample}.jpg",
         # username: Faker::Internet.username,
         admin: false,
-        language: "English",
-        email: "#{USERS[x]}@test.com",
+        # gender: Faker::Gender.binary_type,
+        # phone: Faker::PhoneNumber.cell_phone_with_country_code,
+        email: "#{TEACHER[x]}@test.com",
         password: "123456"
       )
   # teacher.remote_photo_url = teacher.picture
@@ -95,47 +161,7 @@ x = 0
   x += 1
 end
 
-p '__________'
-
-p 'creating 50 students'
-
-x = 0
-20.times do
-  student = Student.new(
-        first_name: "#{USERS[x]}",
-        last_name: Faker::Name.last_name,
-        # picture: "https://randomuser.me/api/portraits/#{['wo',''].sample}men/#{(0..99).to_a.sample}.jpg",
-        # username: Faker::Internet.username,
-        age: rand(5..12),
-        level: LEVEL.sample,
-        course: Course.all.sample,
-        email: "#{USERS[x]}@test.com",
-        password: "123456"
-      )
-  # teacher.remote_photo_url = teacher.picture
-  student.save!
-  x += 1
-end
-
-p '_____________'
-
-p '-----'
-
-p 'creating 1 admin teacher'
-
-admin = Teacher.new(
-        first_name: "Vilson",
-        last_name: Faker::Name.last_name,
-        # picture: "https://randomuser.me/api/portraits/#{['wo',''].sample}men/#{(0..99).to_a.sample}.jpg",
-        # username: Faker::Internet.username,
-        admin: true,
-        language: "English",
-        email: "vilson@test.com",
-        password: "123456"
-  )
-  admin.save!
-
-  p '____________________'
+p '________________________'
 
 
     p 'creating courses'
@@ -148,9 +174,9 @@ admin = Teacher.new(
         # picture: "https://randomuser.me/api/portraits/#{['wo',''].sample}men/#{(0..99).to_a.sample}.jpg",
         # username: Faker::Internet.username,
         description: Faker::Movies::BackToTheFuture.quote,
-        level: LEVEL.sample,
+        level: Level.all.sample,
         teacher: Teacher.all.sample,
-        students: Student.all.sample(4)
+        # student: Student.all.sample
         # email: "#{USERS[x]}@test.com",
         # password: "123456"
       )
@@ -160,5 +186,110 @@ admin = Teacher.new(
 end
 
 p '_________________________'
+
+p 'creating 20 students'
+
+x = 0
+20.times do
+  student = Student.new(
+        first_name: USERS[x],
+        last_name: Faker::Name.last_name,
+        age: Faker::Date.birthday(6, 12),
+        # phone: Faker::PhoneNumber.cell_phone_with_country_code,
+        email: "#{USERS[x]}@test.com",
+        password: "123456",
+        # address: Faker::Address.city,
+        # lat: -28.6775,
+        # long: -49.36972,
+        # gender: Faker::Gender.binary_type,
+        parent: Parent.all.sample,
+        # image: "https://randomuser.me/api/portraits/#{['wo',''].sample}men/#{(0..99).to_a.sample}.jpg",
+        course: Course.all.sample,
+        # username: Faker::Internet.username,
+       level: LEVEL.sample
+      )
+  # teacher.remote_photo_url = teacher.picture
+  student.save!
+  x += 1
+end
+
+
+# create_table "students", force: :cascade do |t|
+#     t.string "email", default: "", null: false
+#     t.string "encrypted_password", default: "", null: false
+#     t.string "reset_password_token"
+#     t.datetime "reset_password_sent_at"
+#     t.datetime "remember_created_at"
+#     t.integer "sign_in_count", default: 0, null: false
+#     t.datetime "current_sign_in_at"
+#     t.datetime "last_sign_in_at"
+#     t.string "current_sign_in_ip"
+#     t.string "last_sign_in_ip"
+#     t.string "name"
+#     t.date "dob"
+#     t.string "phone"
+#     t.text "address"
+#     t.float "lat"
+#     t.float "long"
+#     t.string "last_login_ip"
+#     t.integer "parent_id"
+#     t.datetime "created_at", null: false
+#     t.datetime "updated_at", null: false
+#     t.string "gender"
+#     t.string "image"
+#     t.index ["email"], name: "index_students_on_email", unique: true
+#     t.index ["parent_id"], name: "index_students_on_parent_id"
+#     t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
+
+p '_________________________'
+
+
+#
+
+p 'creating 1 admin'
+
+x = 0
+1.times do
+  teacher = Teacher.new(
+        first_name: "Vilson",
+        last_name: Faker::Name.last_name,
+        language: "English",
+        # dob: Faker::Date.birthday(18, 65),
+        # image: "https://randomuser.me/api/portraits/#{['wo',''].sample}men/#{(0..99).to_a.sample}.jpg",
+        # username: Faker::Internet.username,
+        admin: true,
+        # gender: Faker::Gender.binary_type,
+        # phone: Faker::PhoneNumber.cell_phone_with_country_code,
+        email: "vilson@test.com",
+        password: "123456"
+      )
+  # teacher.remote_photo_url = teacher.picture
+  teacher.save!
+  x += 1
+end
+
+  p '____________________'
+
+
+  p ' creating lessons'
+
+  x = 0
+20.times do
+  lesson = Lesson.new(
+        name: Faker::Book.title,
+        material: Faker::Book.title,
+        course: Course.all.sample
+        # username: Faker::Internet.username,
+        # level: LEVEL.sample,
+        # course: Course.all.sample,
+
+      )
+  # teacher.remote_photo_url = teacher.picture
+  lesson.save!
+  x += 1
+end
+
+p '___________________________________'
+
 
 p 'DONE!'

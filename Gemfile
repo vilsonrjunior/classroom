@@ -15,6 +15,10 @@ gem 'sassc-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
+gem 'cloudinary', '~> 1.9.1'
+gem "simple_calendar", "~> 2.0"
+gem 'strftime', '~> 1.0'
+gem "stroke-seven-rails"
 
 group :development do
   gem 'web-console', '>= 3.3.0'

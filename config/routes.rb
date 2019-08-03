@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
+  devise_for :parents
   devise_for :teachers
   resources :teachers, expect: :show
-
+  resources :parents
 
   resources :students
   resources :courses

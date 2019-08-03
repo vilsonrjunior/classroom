@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_02_131039) do
+ActiveRecord::Schema.define(version: 2019_08_02_143653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,14 +27,38 @@ ActiveRecord::Schema.define(version: 2019_08_02_131039) do
     t.index ["teacher_id"], name: "index_courses_on_teacher_id"
   end
 
+  create_table "lessons", force: :cascade do |t|
+    t.string "name"
+    t.string "material"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "course_id"
+    t.index ["course_id"], name: "index_lessons_on_course_id"
+  end
+
+  create_table "levels", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "parents", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.string "email"
     t.string "photo"
     t.string "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_parents_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_parents_on_reset_password_token", unique: true
   end
 
   create_table "students", force: :cascade do |t|
@@ -50,8 +74,10 @@ ActiveRecord::Schema.define(version: 2019_08_02_131039) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.bigint "parent_id"
     t.index ["course_id"], name: "index_students_on_course_id"
     t.index ["email"], name: "index_students_on_email", unique: true
+    t.index ["parent_id"], name: "index_students_on_parent_id"
     t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
   end
 
@@ -73,5 +99,7 @@ ActiveRecord::Schema.define(version: 2019_08_02_131039) do
 
   add_foreign_key "courses", "students"
   add_foreign_key "courses", "teachers"
+  add_foreign_key "lessons", "courses"
   add_foreign_key "students", "courses"
+  add_foreign_key "students", "parents"
 end
