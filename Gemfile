@@ -14,11 +14,12 @@ gem 'font-awesome-sass', '~> 5.6.1'
 gem 'sassc-rails'
 gem 'simple_form'
 gem 'uglifier'
-gem 'webpacker'
+gem 'webpacker', "~> 3"
 gem 'cloudinary', '~> 1.9.1'
 gem "simple_calendar", "~> 2.0"
 gem 'strftime', '~> 1.0'
 gem "stroke-seven-rails"
+gem "react_on_rails", "11.1.4"
 
 group :development do
   gem 'web-console', '>= 3.3.0'

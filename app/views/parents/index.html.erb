@@ -18,9 +18,9 @@
       <table class="table table-hover table-striped">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>Phone</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
             <th>Address</th>
             <th>Actions</th>
           </tr>
@@ -63,49 +63,37 @@
   </div>
 </div>
 <% else %>
+<% if current_teacher.admin? == false %>
 <div class="col-xs-12 col md-12">
   <div class="card">
-    <div class="header">
-      <h4 class="title">
-        <i class="pe-7s-users"></i>
-        Listing Parents
-      </h4>
-      <hr/>
-      <%= link_to new_parent_path, class: 'btn btn-primary btn-fill' do %>
-        <i class="fa fa-plus-square"></i>
-        New Parent
-      <% end %>
-      <br/>
-      <br/>
-    </div>
     <div class="content table-responsive table-full-width">
       <table class="table table-hover table-striped">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>Phone</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
             <th>Address</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <% @parents.each do |parent| %>
+          <% current_teacher.students.each do |student| %>
             <tr>
               <td>
-                <%= parent.first_name %>
+                <%= student.parent.first_name %>
               </td>
               <td>
-                <%= parent.last_name %>
+                <%= student.parent.last_name %>
               </td>
               <td>
-                <%= parent.email%>
+                <%= student.parent.email%>
               </td>
               <td>
-                <%= parent.address %>
+                <%= student.parent.address %>
               </td>
               <td>
-                <%= link_to parent, class: 'btn btn-info btn-sm' do %>
+                <%= link_to student.parent, class: 'btn btn-info btn-sm' do %>
                   <i class="fa fa-eye"></i>
                   Show
                 <% end %>
@@ -118,4 +106,5 @@
     <br/>
   </div>
 </div>
+<% end %>
 <% end %>

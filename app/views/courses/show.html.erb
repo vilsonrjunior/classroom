@@ -1,12 +1,86 @@
-<h3>This is course <%=@course.name %>, taught be teacher <%=@course.teacher.first_name %></h4>
-
-<h5>Your students are:</h5>
-
-  <% @course.students.each do |student|%>
-<ul>
-    <%= student.first_name %> <%= student.last_name %>
-</ul>
-  <% end %>
-
-
-<h5>LESSONS - GO TO LESSONS</h5>
+<% if notice.present? %>
+  <div class="alert alert-info" role="alert">
+    <%= notice %>
+  </div>
+<% end %>
+<div class="col-xs-12 col md-12">
+  <div class="card">
+    <div class="header">
+      <h4 class="title">Course</h4>
+      <hr/>
+    </div>
+    <div class="content">
+      <div class="row">
+        <div class="col-md-6 col-xs-12">
+          <table class="table">
+            <tr>
+              <th>Name</th>
+              <td>
+                <%= @course.name %>
+              </td>
+            </tr>
+            <tr>
+              <th>Description</th>
+              <td>
+                <%= @course.description %>
+              </td>
+            </tr>
+            <tr>
+              <th>Start Date</th>
+              <td>
+                <%= @course.start_date %>
+              </td>
+              <tr>
+              <th>End Date</th>
+              <td>
+                <%= @course.end_date %>
+              </td>
+            <tr>
+              <th>Grade</th>
+              <td>
+                <%= @course.level.name %>
+              </td>
+            </tr>
+            <tr>
+              <th>Teacher</th>
+              <td>
+                <%= @course.teacher.first_name %>
+              </td>
+            </tr>
+            <tr>
+              <th>Students enrolled</th>
+              <td>
+                <% @course.students.each do |student| %>
+              <ul>
+                <li style="list-style: none">
+                  <%= student.first_name %>
+                </li>
+              </ul>
+                <% end %>
+              <tr>
+                <th>Lessons</th>
+                <td>
+                <% @course.lessons.each do |lesson| %>
+                <ul>
+                  <%= link_to lesson.name, lesson_path %>
+                </ul>
+                <% end %>
+              </td>
+              </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <%= link_to courses_path, class: 'btn btn-default' do %>
+        <i class="fa fa-chevron-left"></i>
+        Back
+      <% end %>
+      <%= link_to edit_course_path(@course), class: 'btn btn-primary btn-fill' do %>
+        <i class="fa fa-edit"></i>
+        Edit
+      <% end %>
+    </div>
+    <br/>
+  </div>
+</div>

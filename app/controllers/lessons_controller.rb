@@ -3,7 +3,7 @@ class LessonsController < ApplicationController
   before_action :set_lesson, only: [:show, :edit, :update, :destroy]
 
   def index
-    if current_user
+    if current_teacher.admin?
      @lessons = Lesson.all
     elsif current_teacher
      if current_teacher.courses != nil

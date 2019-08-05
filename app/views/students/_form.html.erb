@@ -5,6 +5,7 @@
     <div class="col-xs-12 col-md-6">
       <%= f.input :first_name %>
       <%= f.input :last_name %>
+      <%= f.input :parent_id, collection: Parent.all %>
       <%= f.input :email %>
       <%= f.input :password %>
       <%= f.input :age, as: :date, start_year: Date.today.year - 15,
