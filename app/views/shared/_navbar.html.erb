@@ -1,61 +1,119 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <%= link_to root_path, class: "navbar-brand" do %>
+<div class="navbar-speakit_live">
+  <!-- Logo -->
+  <a href="/" class="navbar-speakit_live-brand">
     <%= image_tag "https://previews.123rf.com/images/dvarg/dvarg1603/dvarg160300020/52984920-illustration-of-a-friendly-cute-bee-flying-and-smiling.jpg" %>
-    <% end %>
+  </a>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-
+  <!-- Right Navigation -->
+    <div class="navbar-speakit_live-right hidden-xs hidden-sm">
       <% if teacher_signed_in? %>
-      <div class="my-navbar-container">
-        Hello <%= current_teacher.first_name.capitalize || current_teacher.name%>
 
-          <%= image_tag current_teacher.photo, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-
-      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="fa fa-user-circle-o"></i>
-            My Account
-            <b class="caret"></b>
-          </a>
-      <ul class="dropdown-menu">
-       <li>
-         <%= link_to current_teacher do %>
-              <p>Profile</p>
-            <% end %>
-          </li>
-            <li>
-              <a href="#">
-                <i class="fa fa-gears"></i>
-                Settings
-           </a>
-        </li>
-      </ul>
-
-      <li>
-          <%= link_to destroy_teacher_session_url, method: :delete do %>
-            <i class="fa fa-power-off"></i>
-            Log out
-          <% end %>
-      </li>
-      </ul>
+        <!-- When Teacher is Signed In -->
+        <%= link_to "Courses", courses_path, class: "navbar-speakit_live-item" %>
+        <div class="navbar-wagon-item">
+          <div class="dropdown">
+            <%= image_tag 'teacher_icon.png', class: "navbar-icon dropdown-toggle", id: "navbar-wagon-menu", "data-toggle": "dropdown" %>
+            <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+              <li><%= link_to "Log Out", destroy_teacher_session_path, method: :delete, class: "navbar-speakit_live-item navbar-speakit_live-link" %></li>
+            </ul>
           </div>
-        </li>
+        </div>
+
+      <% elsif student_signed_in? %>
+
+        <!-- When Student is Signed In -->
+        <%= link_to "Courses", courses_path, class: "navbar-speakit_live-item" %>
+        <div class="navbar-wagon-item">
+          <div class="dropdown">
+            <%= image_tag 'student_icon.png', class: "navbar-icon dropdown-toggle", id: "navbar-wagon-menu", "data-toggle": "dropdown" %>
+            <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+              <li><%= link_to "Log Out", destroy_student_session_path, method: :delete, class: "navbar-speakit_live-item navbar-speakit_live-link" %></li>
+            </ul>
+          </div>
+        </div>
+
+        <% elsif parent_signed_in? %>
+
+        <!-- When Student is Signed In -->
+        <%= link_to "Courses", courses_path, class: "navbar-speakit_live-item" %>
+        <div class="navbar-wagon-item">
+          <div class="dropdown">
+            <%= image_tag 'student_icon.png', class: "navbar-icon dropdown-toggle", id: "navbar-wagon-menu", "data-toggle": "dropdown" %>
+            <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+              <li><%= link_to "Log Out", destroy_parent_session_path, method: :delete, class: "navbar-speakit_live-item navbar-speakit_live-link" %></li>
+            </ul>
+          </div>
+        </div>
+
       <% else %>
-        <li class="nav-item">
-          <%= link_to "Login", new_teacher_session_path, class: "nav-link" %>
-        </li>
+
+
+          <!-- Parent Sign In -->
+        <%= link_to parent_session_path, class: "navbar-icon-link" do %>
+          <%= image_tag 'teacher_icon.png', class: "navbar-icon"%>
+          <small>Parent</small>
+        <% end %>
+        <!-- Student Sign In -->
+        <%= link_to student_session_path, class: "navbar-icon-link" do  %>
+           <%= image_tag 'student_icon.png', class: "navbar-icon"%>
+          <small>Student</small>
+        <% end %>
+
+        <!-- Teacher Sign In -->
+        <%= link_to teacher_session_path, class: "navbar-icon-link" do %>
+          <%= image_tag 'teacher_icon.png', class: "navbar-icon"%>
+          <small>Teacher</small>
+        <% end %>
+
+
+
       <% end %>
-    </ul>
+
+
+
+
+
+
+
+
+
+      <!-- Profile picture with dropdown list -->
+
+    </div>
+
+  <!-- Dropdown appearing on mobile only -->
+  <div class="navbar-speakit_live-item hidden-md hidden-lg">
+    <div class="dropdown">
+      <i class="fas fa-bars dropdown-toggle" data-toggle="dropdown" role="button"></i>
+      <ul class="dropdown-menu dropdown-menu-right navbar-speakit_live-dropdown-menu">
+
+        <!-- Teacher Sign In or Sign Up -->
+        <% if !student_signed_in? && !teacher_signed_in? %>
+          <li><%= link_to "Teacher Sign In", teacher_session_path %></li>
+        <% end %>
+
+        <!-- Student Sign In or Sign Up -->
+        <% if !student_signed_in? && !teacher_signed_in? %>
+          <li><%= link_to "Student Sign In", student_session_path %></li>
+        <% end %>
+
+        <!-- Teacher is Signed In -->
+        <% if teacher_signed_in? %>
+          <li><%= link_to "Courses", courses_path %></li>
+          <li><%= link_to "Teacher Sign Out", destroy_teacher_session_path, method: :delete %></li>
+        <% end %>
+
+        <% if student_signed_in? %>
+          <li><%= link_to "Courses", courses_path %></li>
+          <li><%= link_to "Student Sign Out", destroy_student_session_path, method: :delete %></li>
+        <% end %>
+
+        <% if parent_signed_in? %>
+          <li><%= link_to "Courses", courses_path %></li>
+          <li><%= link_to "Parent Sign Out", destroy_parent_session_path, method: :delete %></li>
+        <% end %>
+
+      </ul>
+    </div>
   </div>
 </div>
-
-
-

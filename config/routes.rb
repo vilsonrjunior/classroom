@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'hello_world', to: 'hello_world#index'
   # devise_for :parents
   # devise_for :teachers
   # resources :teachers, expect: :show
